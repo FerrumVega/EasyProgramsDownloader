@@ -15,11 +15,11 @@ echo этот скрипт создан FerrumVega
 echo для лёгкого и быстрого скачивания програм.
 echo Вы можете свободно изменять 
 echo и распространять этот скрипт
-echo без необходимости получения разрешения
-echo English: This script is available only Russian Language, if you want to check for updates, connect your computer to Internet an restart this script. Script will automatically update from GitHub.  
+echo без необходимости получения разрешения 
 echo ==============================
 echo [1] Перейти в Telegram канал FerrumVeg'и
 echo [0] Выйти
+echo [H] Help
 echo [Другая клавиша] Продолжить
 echo ==============================
 set /p hello="Выберите опцию: "
@@ -29,8 +29,9 @@ if "%hello%"=="0" (
     start https://t.me/FerrumVega
     pause
     goto hello
+) else if "%hello%"=="H" (
+    echo English: This script is available only in Russian Language, if you want to check for updates, connect your computer to Internet an restart this script. Script will automatically updated from GitHub. 
 )
-
 :: Меню выбора пути для сохранения файлов
 :choose_path
 cls
