@@ -30,7 +30,7 @@ if "%hello%"=="0" (
     pause
     goto hello
 ) else if "%hello%"=="H" (
-    echo English: This script is available only in Russian Language, if you want to check for updates, connect your computer to Internet an restart this script. Script will automatically updated from GitHub. 
+    echo English: This script is available only in Russian Language, if you want to check for updates, connect your computer to Internet an restart this script. Script will be automatically updated from GitHub. 
 )
 :: Меню выбора пути для сохранения файлов
 :choose_path
