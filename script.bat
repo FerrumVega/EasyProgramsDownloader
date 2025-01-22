@@ -10,12 +10,13 @@ pause
 :hello
 cls
 echo ==============================
-echo Добро пожаловать! Обновление!
+echo Добро пожаловать в EPD!
 echo этот скрипт создан FerrumVega
 echo для лёгкого и быстрого скачивания програм.
 echo Вы можете свободно изменять 
 echo и распространять этот скрипт
 echo без необходимости получения разрешения
+echo English: This script is available only Russian Language, if you want to check for updates, connect your computer to Internet an restart this script. Script will automatically update from GitHub.  
 echo ==============================
 echo [1] Перейти в Telegram канал FerrumVeg'и
 echo [0] Выйти
