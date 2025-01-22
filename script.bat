@@ -4,7 +4,7 @@ chcp 65001
 :: Скачать содержимое по URL и записать в файл
 powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/FerrumVega/EasyProgramsDownloader/main/script.bat' -OutFile '%~dp0/%~nx0'"
 
-echo Файл %~nx0 заполнен содержимым из указанного URL.
+echo Скрипт был успешно загружен с GitHub.
 
 pause
 :hello
