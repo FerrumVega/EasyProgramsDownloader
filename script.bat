@@ -7,7 +7,7 @@ powershell -command "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/F
 echo Скрипт был успешно загружен с GitHub.
 
 pause
-:hello
+:hello 
 cls
 echo ==============================
 echo Добро пожаловать в EPD!
