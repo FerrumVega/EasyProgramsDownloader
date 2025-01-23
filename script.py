@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, ttk
 import requests
 import os
+import threading
 
 class EasyProgramsDownloader:
     def __init__(self, root):
@@ -75,6 +76,7 @@ class EasyProgramsDownloader:
         
         tk.Button(self.root, text="Скачать выбранные программы", command=self.download_selected_programs).pack(pady=10)
         tk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
+        self.progress_bar.pack(pady=10)
     
     def download_all(self):
         programs = {
@@ -84,7 +86,7 @@ class EasyProgramsDownloader:
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
             "Discord": "https://discordapp.com/api/download?platform=win",
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%20Chrome%26needsadmin%3Dfalse/ChromeStandaloneSetup.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -93,7 +95,7 @@ class EasyProgramsDownloader:
     def download_minimal_package(self):
         programs = {
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%20Chrome%26needsadmin%3Dfalse/ChromeStandaloneSetup.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
         }
         self.download_programs(programs)
     
@@ -112,7 +114,7 @@ class EasyProgramsDownloader:
             "Total Commander": "https://totalcommander.ch/1150/tcmd1150x32.exe",
             "Rainmeter": "https://github.com/rainmeter/rainmeter/releases/download/v4.5.20.3803/Rainmeter-4.5.20.exe",
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%20Chrome%26needsadmin%3Dfalse/ChromeStandaloneSetup.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -120,23 +122,51 @@ class EasyProgramsDownloader:
         self.download_programs(selected_programs)
     
     def download_programs(self, programs):
+        threading.Thread(target=self._download_programs, args=(programs,)).start()
+
+    def _download_programs(self, programs):
+        total_programs = len(programs)
+        progress = 0
+        self.progress_bar["maximum"] = total_programs
+
         for name, url in programs.items():
             self.download_file(name, url)
+            progress += 1
+            self.progress_bar["value"] = progress
+            self.root.update_idletasks()
+
         messagebox.showinfo("Загрузка завершена", "Все выбранные программы были успешно загружены.")
     
     def download_file(self, name, url):
         if not self.save_path:
             messagebox.showwarning("Путь не выбран", "Пожалуйста, выберите путь для сохранения файлов.")
             return
-        response = requests.get(url)
+        
+        # Update the progress text
+        progress_text = tk.Label(self.root, text=f"Скачивание {name}...")
+        progress_text.pack(pady=5)
+        self.root.update_idletasks()
+
+        # Download the file
+        response = requests.get(url, stream=True)
         file_path = os.path.join(self.save_path, f"{name}.exe")
+        total_size = int(response.headers.get('content-length', 0))
+        chunk_size = 1024
         with open(file_path, 'wb') as file:
-            file.write(response.content)
+            for data in response.iter_content(chunk_size=chunk_size):
+                file.write(data)
+                downloaded_size = file.tell()
+                self.progress_bar["value"] = downloaded_size / total_size * 100
+                self.root.update_idletasks()
+        
         print(f"Скачан {name}")
+        progress_text.pack_forget()
 
     def clear_window(self):
         for widget in self.root.winfo_children():
             widget.destroy()
+        self.progress_bar = ttk.Progressbar(self.root, orient="horizontal", length=400, mode="determinate")
+        self.progress_bar.pack(pady=10)
 
 if __name__ == "__main__":
     root = tk.Tk()
