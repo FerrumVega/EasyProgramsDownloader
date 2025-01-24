@@ -1,7 +1,8 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, ttk
 import requests
 import os
+import sys
 import threading
 import time
 
@@ -9,29 +10,42 @@ class EasyProgramsDownloader:
     def __init__(self, root):
         self.root = root
         self.root.title("Easy Programs Downloader")
+        self.apply_azure_theme()
         self.save_path = ""
         self.choose_path_menu()
+
+    def apply_azure_theme(self):
+        # Ensure the azure.tcl file is in the 'themes' directory
+        base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
+        theme_path = os.path.join(base_path, "themes")
+        azure_path = os.path.join(theme_path, "azure.tcl")
+        if os.path.exists(azure_path):
+            self.root.tk.call("source", azure_path)
+            self.root.tk.call("set_theme", "dark")
+        else:
+            messagebox.showerror("Ошибка", "Ошибка: Файл темы не найден. Используется стандартная тема.")
+
     
     def main_menu(self):
         self.clear_window()
-        tk.Label(self.root, text="Добро пожаловать в EPD!", font=("Arial", 14)).pack(pady=10)
-        tk.Label(self.root, text="Этот скрипт создан FerrumVega для лёгкого и быстрого скачивания программ.", wraplength=400).pack(pady=10)
+        ttk.Label(self.root, text="Добро пожаловать в EPD!", font=("Arial", 14)).pack(pady=10)
+        ttk.Label(self.root, text="Этот скрипт создан FerrumVega для лёгкого и быстрого скачивания программ.", wraplength=400).pack(pady=10)
         
-        tk.Button(self.root, text="Перейти в Telegram канал FerrumVega", command=lambda: os.system("start https://t.me/FerrumVega")).pack(pady=5)
-        tk.Button(self.root, text="Выбрать путь для сохранения файлов", command=self.choose_path_menu).pack(pady=5)
-        tk.Button(self.root, text="Сохранить все программы", command=self.download_all).pack(pady=5)
-        tk.Button(self.root, text="Готовые пакеты", command=self.prebuilt_packages_menu).pack(pady=5)
-        tk.Button(self.root, text="Выбрать программы", command=self.custom_selection_menu).pack(pady=5)
-        tk.Button(self.root, text="Выйти", command=self.root.quit).pack(pady=5)
+        ttk.Button(self.root, text="Перейти в Telegram канал FerrumVega", command=lambda: os.system("start https://t.me/FerrumVega")).pack(pady=5)
+        ttk.Button(self.root, text="Выбрать путь для сохранения файлов", command=self.choose_path_menu).pack(pady=5)
+        ttk.Button(self.root, text="Сохранить все программы", command=self.download_all).pack(pady=5)
+        ttk.Button(self.root, text="Готовые пакеты", command=self.prebuilt_packages_menu).pack(pady=5)
+        ttk.Button(self.root, text="Выбрать программы", command=self.custom_selection_menu).pack(pady=5)
+        ttk.Button(self.root, text="Выйти", command=self.root.quit).pack(pady=5)
     
     def choose_path_menu(self):
         self.clear_window()
-        tk.Label(self.root, text="Выберите путь для сохранения файлов", font=("Arial", 14)).pack(pady=10)
+        ttk.Label(self.root, text="Выберите путь для сохранения файлов", font=("Arial", 14)).pack(pady=10)
         
-        tk.Button(self.root, text="Сохранить в загрузки в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Downloads", "Programs"))).pack(pady=5)
-        tk.Button(self.root, text="Сохранить на рабочий стол в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Desktop", "Programs"))).pack(pady=5)
-        tk.Button(self.root, text="Указать свой путь", command=self.set_custom_path).pack(pady=5)
-        tk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
+        ttk.Button(self.root, text="Сохранить в загрузки в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Downloads", "Programs"))).pack(pady=5)
+        ttk.Button(self.root, text="Сохранить на рабочий стол в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Desktop", "Programs"))).pack(pady=5)
+        ttk.Button(self.root, text="Указать свой путь", command=self.set_custom_path).pack(pady=5)
+        ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
     
     def set_save_path(self, path):
         self.save_path = path
@@ -50,14 +64,14 @@ class EasyProgramsDownloader:
     
     def prebuilt_packages_menu(self):
         self.clear_window()
-        tk.Label(self.root, text="Следующие готовые пакеты доступны", font=("Arial", 14)).pack(pady=10)
-        tk.Button(self.root, text="Минимальный пакет (Telegram, Google Chrome)", command=self.download_minimal_package).pack(pady=5)
-        tk.Button(self.root, text="Игровой пакет (Steam, Discord)", command=self.download_gaming_package).pack(pady=5)
-        tk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
+        ttk.Label(self.root, text="Следующие готовые пакеты доступны", font=("Arial", 14)).pack(pady=10)
+        ttk.Button(self.root, text="Минимальный пакет (Telegram, Google Chrome)", command=self.download_minimal_package).pack(pady=5)
+        ttk.Button(self.root, text="Игровой пакет (Steam, Discord)", command=self.download_gaming_package).pack(pady=5)
+        ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
     
     def custom_selection_menu(self):
         self.clear_window()
-        tk.Label(self.root, text="Выберите программы для скачивания", font=("Arial", 14)).pack(pady=10)
+        ttk.Label(self.root, text="Выберите программы для скачивания", font=("Arial", 14)).pack(pady=10)
         
         self.program_vars = {
             "Discord": tk.BooleanVar(),
@@ -72,10 +86,10 @@ class EasyProgramsDownloader:
         }
         
         for program, var in self.program_vars.items():
-            tk.Checkbutton(self.root, text=program, variable=var).pack(anchor='w')
+            ttk.Checkbutton(self.root, text=program, variable=var).pack(anchor='w')
         
-        tk.Button(self.root, text="Скачать выбранные программы", command=self.download_selected_programs).pack(pady=10)
-        tk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
+        ttk.Button(self.root, text="Скачать выбранные программы", command=self.download_selected_programs).pack(pady=10)
+        ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
     
     def download_all(self):
         programs = {
@@ -126,9 +140,9 @@ class EasyProgramsDownloader:
     def _download_programs(self, programs):
         total_programs = len(programs)
         
-        progress_label = tk.Label(self.root, text="")
+        progress_label = ttk.Label(self.root, text="")
         progress_label.pack(pady=5)
-        remaining_label = tk.Label(self.root, text=f"Осталось: {total_programs} программ")
+        remaining_label = ttk.Label(self.root, text=f"Осталось: {total_programs} программ")
         remaining_label.pack(pady=5)
         
         for name, url in programs.items():
@@ -145,7 +159,7 @@ class EasyProgramsDownloader:
             return
         
         # Update the progress text
-        progress_text = tk.Label(self.root, text=f"Скачивание {name}...")
+        progress_text = ttk.Label(self.root, text=f"Скачивание {name}...")
         progress_text.pack(pady=5)
         self.root.update_idletasks()
 
