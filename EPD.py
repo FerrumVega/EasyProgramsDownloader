@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog, ttk
+from tkinter import filedialog, ttk
 import requests
 import os
 import sys
@@ -12,10 +12,22 @@ class EasyProgramsDownloader:
         self.root.title("Easy Programs Downloader")
         self.apply_azure_theme()
         self.save_path = ""
+        
+        # Create a frame for download information
+        self.download_info_frame = ttk.Frame(self.root)
+        self.download_info_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
+        
+        # Create labels for download information
+        self.current_download_label = ttk.Label(self.download_info_frame, text="")
+        self.progress_label = ttk.Label(self.download_info_frame, text="")
+        self.remaining_label = ttk.Label(self.download_info_frame, text="")
+        self.current_download_label.pack()
+        self.progress_label.pack()
+        self.remaining_label.pack()
+        
         self.choose_path_menu()
 
     def apply_azure_theme(self):
-        # Ensure the azure.tcl file is in the 'themes' directory
         base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
         theme_path = os.path.join(base_path, "themes")
         azure_path = os.path.join(theme_path, "azure.tcl")
@@ -23,12 +35,9 @@ class EasyProgramsDownloader:
         if os.path.exists(azure_path):
             self.root.tk.call("source", azure_path)
             self.root.tk.call("set_theme", "dark")
-        else:
-            messagebox.showerror("Ошибка", "Ошибка: Файл темы не найден. Используется стандартная тема.")
 
-    
     def main_menu(self):
-        self.clear_window()
+        self.clear_window_except_download_info()
         ttk.Label(self.root, text="Добро пожаловать в EPD!", font=("Arial", 14)).pack(pady=10)
         ttk.Label(self.root, text="Этот скрипт создан FerrumVega для лёгкого и быстрого скачивания программ.", wraplength=400).pack(pady=10)
         
@@ -38,9 +47,9 @@ class EasyProgramsDownloader:
         ttk.Button(self.root, text="Готовые пакеты", command=self.prebuilt_packages_menu).pack(pady=5)
         ttk.Button(self.root, text="Выбрать программы", command=self.custom_selection_menu).pack(pady=5)
         ttk.Button(self.root, text="Выйти", command=self.root.quit).pack(pady=5)
-    
+
     def choose_path_menu(self):
-        self.clear_window()
+        self.clear_window_except_download_info()
         ttk.Label(self.root, text="Выберите путь для сохранения файлов", font=("Arial", 14)).pack(pady=10)
         
         ttk.Button(self.root, text="Сохранить в загрузки в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Downloads", "Programs"))).pack(pady=5)
@@ -52,7 +61,6 @@ class EasyProgramsDownloader:
         self.save_path = path
         if not os.path.exists(self.save_path):
             os.makedirs(self.save_path)
-        messagebox.showinfo("Путь сохранения", f"Файлы будут сохранены по пути: {self.save_path}")
         self.main_menu()
 
     def set_custom_path(self):
@@ -60,18 +68,17 @@ class EasyProgramsDownloader:
         if self.save_path:
             if not os.path.exists(self.save_path):
                 os.makedirs(self.save_path)
-            messagebox.showinfo("Путь сохранения", f"Файлы будут сохранены по пути: {self.save_path}")
         self.main_menu()
     
     def prebuilt_packages_menu(self):
-        self.clear_window()
+        self.clear_window_except_download_info()
         ttk.Label(self.root, text="Следующие готовые пакеты доступны", font=("Arial", 14)).pack(pady=10)
         ttk.Button(self.root, text="Минимальный пакет (Telegram, Google Chrome)", command=self.download_minimal_package).pack(pady=5)
         ttk.Button(self.root, text="Игровой пакет (Steam, Discord)", command=self.download_gaming_package).pack(pady=5)
         ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
     
     def custom_selection_menu(self):
-        self.clear_window()
+        self.clear_window_except_download_info()
         ttk.Label(self.root, text="Выберите программы для скачивания", font=("Arial", 14)).pack(pady=10)
         
         self.program_vars = {
@@ -100,7 +107,7 @@ class EasyProgramsDownloader:
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
             "Discord": "https://discordapp.com/api/download?platform=win",
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
+            "Google Chrome": "https://dl.google.com/chrome/install/latest/chrome_installer.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -109,7 +116,7 @@ class EasyProgramsDownloader:
     def download_minimal_package(self):
         programs = {
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
+            "Google Chrome": "https://dl.google.com/chrome/install/latest/chrome_installer.exe",
         }
         self.download_programs(programs)
     
@@ -128,7 +135,7 @@ class EasyProgramsDownloader:
             "Total Commander": "https://totalcommander.ch/1150/tcmd1150x32.exe",
             "Rainmeter": "https://github.com/rainmeter/rainmeter/releases/download/v4.5.20.3803/Rainmeter-4.5.20.exe",
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
+            "Google Chrome": "https://dl.google.com/chrome/install/latest/chrome_installer.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -140,31 +147,21 @@ class EasyProgramsDownloader:
 
     def _download_programs(self, programs):
         total_programs = len(programs)
-        
-        progress_label = ttk.Label(self.root, text="")
-        progress_label.pack(pady=5)
-        remaining_label = ttk.Label(self.root, text=f"Осталось: {total_programs} программ")
-        remaining_label.pack(pady=5)
+        self.root.after(0, self.remaining_label.config, {'text': f"Осталось: {total_programs} программ"})
         
         for name, url in programs.items():
-            self.download_file(name, url, progress_label, remaining_label)
+            self.download_file(name, url)
             total_programs -= 1
-            remaining_label.config(text=f"Осталось: {total_programs} программ")
-            self.root.update_idletasks()
+            self.root.after(0, self.remaining_label.config, {'text': f"Осталось: {total_programs} программ"})
 
-        messagebox.showinfo("Загрузка завершена", "Все выбранные программы были успешно загружены.")
+        self.root.after(0, self.remaining_label.config, {'text': "Все выбранные программы были успешно загружены."})
     
-    def download_file(self, name, url, progress_label, remaining_label):
+    def download_file(self, name, url):
         if not self.save_path:
-            messagebox.showwarning("Путь не выбран", "Пожалуйста, выберите путь для сохранения файлов.")
             return
         
-        # Update the progress text
-        progress_text = ttk.Label(self.root, text=f"Скачивание {name}...")
-        progress_text.pack(pady=5)
-        self.root.update_idletasks()
+        self.root.after(0, self.current_download_label.config, {'text': f"Скачивание {name}..."})
 
-        # Download the file
         response = requests.get(url, stream=True)
         file_path = os.path.join(self.save_path, f"{name}.exe")
         total_size = int(response.headers.get('content-length', 0))
@@ -178,16 +175,16 @@ class EasyProgramsDownloader:
                 downloaded_size += len(data)
                 elapsed_time = time.time() - start_time
                 speed = (downloaded_size / 1024) / elapsed_time if elapsed_time > 0 else 0
-                progress_label.config(text=f"{downloaded_size // (1024 * 1024)} MB / {total_size // (1024 * 1024)} MB, {speed:.2f} KB/s")
-                self.root.update_idletasks()
+                self.root.after(0, self.progress_label.config, {'text': f"{downloaded_size // (1024 * 1024)} MB / {total_size // (1024 * 1024)} MB, {speed:.2f} KB/s"})
         
         print(f"Скачан {name}")
-        progress_text.pack_forget()
-        self.root.after(3000, lambda: progress_label.config(text=""))
+        self.root.after(0, self.progress_label.config, {'text': ''})
+        self.root.after(0, self.current_download_label.config, {'text': ''})
 
-    def clear_window(self):
+    def clear_window_except_download_info(self):
         for widget in self.root.winfo_children():
-            widget.destroy()
+            if widget not in [self.download_info_frame]:
+                widget.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
