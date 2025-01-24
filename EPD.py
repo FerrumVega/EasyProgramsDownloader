@@ -19,6 +19,7 @@ class EasyProgramsDownloader:
         base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
         theme_path = os.path.join(base_path, "themes")
         azure_path = os.path.join(theme_path, "azure.tcl")
+        print(azure_path)
         if os.path.exists(azure_path):
             self.root.tk.call("source", azure_path)
             self.root.tk.call("set_theme", "dark")
