@@ -1,15 +1,15 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog, ttk
+from tkinter import messagebox, filedialog
 import requests
 import os
 import threading
+import time
 
 class EasyProgramsDownloader:
     def __init__(self, root):
         self.root = root
         self.root.title("Easy Programs Downloader")
         self.save_path = ""
-        
         self.choose_path_menu()
     
     def main_menu(self):
@@ -76,7 +76,6 @@ class EasyProgramsDownloader:
         
         tk.Button(self.root, text="Скачать выбранные программы", command=self.download_selected_programs).pack(pady=10)
         tk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
-        self.progress_bar.pack(pady=10)
     
     def download_all(self):
         programs = {
@@ -86,7 +85,7 @@ class EasyProgramsDownloader:
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
             "Discord": "https://discordapp.com/api/download?platform=win",
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -95,7 +94,7 @@ class EasyProgramsDownloader:
     def download_minimal_package(self):
         programs = {
             "Telegram": "https://telegram.org/dl/desktop/win",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
         }
         self.download_programs(programs)
     
@@ -114,7 +113,7 @@ class EasyProgramsDownloader:
             "Total Commander": "https://totalcommander.ch/1150/tcmd1150x32.exe",
             "Rainmeter": "https://github.com/rainmeter/rainmeter/releases/download/v4.5.20.3803/Rainmeter-4.5.20.exe",
             "Steam": "https://cdn.steamstatic.com/client/installer/SteamSetup.exe",
-            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/installer.exe",
+            "Google Chrome": "https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463c-AFF1-A69D9E530F96%7D%26iid%3D%7BFCAC4F22-1EC1-C40A-EBE7-92E9141F63B7%7D%26lang%3Dru%26browser%3D4%26usagestats%3D0%26appname%3DChrome%26needsadmin%3Dtrue/ChromeSetup.exe",
             "AnyDesk": "https://download.anydesk.com/AnyDesk.exe",
             "Яндекс": "https://browser.yandex.ru/download?os=win",
         }
@@ -126,18 +125,21 @@ class EasyProgramsDownloader:
 
     def _download_programs(self, programs):
         total_programs = len(programs)
-        progress = 0
-        self.progress_bar["maximum"] = total_programs
-
+        
+        progress_label = tk.Label(self.root, text="")
+        progress_label.pack(pady=5)
+        remaining_label = tk.Label(self.root, text=f"Осталось: {total_programs} программ")
+        remaining_label.pack(pady=5)
+        
         for name, url in programs.items():
-            self.download_file(name, url)
-            progress += 1
-            self.progress_bar["value"] = progress
+            self.download_file(name, url, progress_label, remaining_label)
+            total_programs -= 1
+            remaining_label.config(text=f"Осталось: {total_programs} программ")
             self.root.update_idletasks()
 
         messagebox.showinfo("Загрузка завершена", "Все выбранные программы были успешно загружены.")
     
-    def download_file(self, name, url):
+    def download_file(self, name, url, progress_label, remaining_label):
         if not self.save_path:
             messagebox.showwarning("Путь не выбран", "Пожалуйста, выберите путь для сохранения файлов.")
             return
@@ -152,21 +154,25 @@ class EasyProgramsDownloader:
         file_path = os.path.join(self.save_path, f"{name}.exe")
         total_size = int(response.headers.get('content-length', 0))
         chunk_size = 1024
+        downloaded_size = 0
+        start_time = time.time()
+        
         with open(file_path, 'wb') as file:
             for data in response.iter_content(chunk_size=chunk_size):
                 file.write(data)
-                downloaded_size = file.tell()
-                self.progress_bar["value"] = downloaded_size / total_size * 100
+                downloaded_size += len(data)
+                elapsed_time = time.time() - start_time
+                speed = (downloaded_size / 1024) / elapsed_time if elapsed_time > 0 else 0
+                progress_label.config(text=f"{downloaded_size // (1024 * 1024)} MB / {total_size // (1024 * 1024)} MB, {speed:.2f} KB/s")
                 self.root.update_idletasks()
         
         print(f"Скачан {name}")
         progress_text.pack_forget()
+        self.root.after(3000, lambda: progress_label.config(text=""))
 
     def clear_window(self):
         for widget in self.root.winfo_children():
             widget.destroy()
-        self.progress_bar = ttk.Progressbar(self.root, orient="horizontal", length=400, mode="determinate")
-        self.progress_bar.pack(pady=10)
 
 if __name__ == "__main__":
     root = tk.Tk()
