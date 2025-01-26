@@ -135,16 +135,19 @@ class EasyProgramsDownloader:
                 if self.life > 0:
                     pygame.draw.circle(surface, self.color, (int(self.x), int(self.y)), self.size)
 
-        def draw_coin(surface, x, y, size, color):
+        def draw_coin(surface, x, y, size):
+            global skin  # Указываем, что мы используем глобальную переменную skin
             if skin == "DOG":
                 coin_image_path = get_theme_path('icon-round-dog.png')
             elif skin == "HABBIT":
                 coin_image_path = get_theme_path('icon-round-habbit.png')
             elif skin == "DEF":
                 coin_image_path = get_theme_path('icon-round.png')  # Файл по умолчанию
+            else:
+                coin_image_path = get_theme_path('icon-round.png')
 
             coin_image = pygame.image.load(coin_image_path).convert_alpha()
-            coin_image = pygame.transform.scale(coin_image, (size*2, size*2))  # Изменяем размер изображения
+            coin_image = pygame.transform.scale(coin_image, (size * 2, size * 2))  # Изменяем размер изображения
             coin_rect = coin_image.get_rect(center=(x, y))
             surface.blit(coin_image, coin_rect)
 
@@ -156,17 +159,17 @@ class EasyProgramsDownloader:
             global coins_per_second
             coins_per_second += 1
 
-        def change_skin_habbit():
+        def change_coin_habbit():
             global skin
-            skin = HABBIT
+            skin = "HABBIT"
 
         def change_coin_dog():
             global skin
-            coin_color = DOG
-            
+            skin = "DOG"
+
         def change_coin_def():
             global skin
-            coin_color = DEF
+            skin = "DEF"
 
         def increase_coin_size():
             global coin_size
@@ -201,7 +204,7 @@ class EasyProgramsDownloader:
             screen.blit(cps_text, (20, 100))
 
             # Отображение монеты под информацией
-            draw_coin(screen, coin_x, coin_y, coin_size, coin_color)
+            draw_coin(screen, coin_x, coin_y, coin_size)
 
             # Обработка событий
             for event in pygame.event.get():
@@ -225,14 +228,12 @@ class EasyProgramsDownloader:
                                         upgrade_click_value()
                                     elif upgrade["function"] == "upgrade_cps":
                                         upgrade_cps()
-                                    elif upgrade["function"] == "change_coin_color_red":
-                                        change_coin_color_red()
-                                    elif upgrade["function"] == "change_coin_color_blue":
-                                        change_coin_color_blue()
-                                    elif upgrade["function"] == "change_coin_color_green":
-                                        change_coin_color_green()
-                                    elif upgrade["function"] == "change_coin_color_purple":
-                                        change_coin_color_purple()
+                                    elif upgrade["function"] == "change_coin_dog":
+                                        change_coin_dog()
+                                    elif upgrade["function"] == "change_coin_habbit":
+                                        change_coin_habbit()
+                                    elif upgrade["function"] == "change_coin_def":
+                                        change_coin_def()
                                     elif upgrade["function"] == "increase_coin_size":
                                         increase_coin_size()
                                     # Увеличиваем стоимость улучшений
