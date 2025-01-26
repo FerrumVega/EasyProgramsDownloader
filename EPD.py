@@ -5,6 +5,9 @@ import os
 import sys
 import threading
 import time
+import pygame
+import random
+
 skin = "def"
 
 class EasyProgramsDownloader:
@@ -47,7 +50,7 @@ class EasyProgramsDownloader:
         ttk.Button(self.root, text="Сохранить все программы", command=self.download_all).pack(pady=5)
         ttk.Button(self.root, text="Готовые пакеты", command=self.prebuilt_packages_menu).pack(pady=5)
         ttk.Button(self.root, text="Выбрать программы", command=self.custom_selection_menu).pack(pady=5)
-        ttk.Button(self.root, text="Коржик (Игра кликер)", command=self.korik).pack(pady=5)
+        ttk.Button(self.root, text="Коржик (Игра кликер)", command=self.start_korik_thread).pack(pady=5)
         ttk.Button(self.root, text="Выйти", command=self.root.quit).pack(pady=5)
 
     def choose_path_menu(self):
@@ -58,13 +61,11 @@ class EasyProgramsDownloader:
         ttk.Button(self.root, text="Сохранить на рабочий стол в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Desktop", "Programs"))).pack(pady=5)
         ttk.Button(self.root, text="Указать свой путь", command=self.set_custom_path).pack(pady=5)
         ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
-        
-    def korik(self):
-        import pygame
-        import random
-        import os
-        import sys
 
+    def start_korik_thread(self):
+        threading.Thread(target=self.korik).start()
+
+    def korik(self):
         def get_theme_path(file_name):
             base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
             theme_path = os.path.join(base_path, "themes")
@@ -77,7 +78,7 @@ class EasyProgramsDownloader:
         WIDTH = 800
         HEIGHT = 600
         screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        pygame.display.set_caption("Кликер Игра")
+        pygame.display.set_caption("Коржик")
 
         # Цвета
         WHITE = (255, 255, 255)
@@ -103,6 +104,8 @@ class EasyProgramsDownloader:
         coins_per_second = 0
         coin_color = GOLD  # Начальный цвет монеты
         coin_size = 100  # Начальный размер монеты
+        global skin
+        skin = "DEF"  # Ensure skin is initialized
 
         upgrades = {
             "Стоимость клика": {"cost": 10, "function": "upgrade_click_value"},
@@ -136,13 +139,13 @@ class EasyProgramsDownloader:
                     pygame.draw.circle(surface, self.color, (int(self.x), int(self.y)), self.size)
 
         def draw_coin(surface, x, y, size):
-            global skin  # Указываем, что мы используем глобальную переменную skin
+            global skin
             if skin == "DOG":
                 coin_image_path = get_theme_path('icon-round-dog.png')
             elif skin == "HABBIT":
                 coin_image_path = get_theme_path('icon-round-habbit.png')
             elif skin == "DEF":
-                coin_image_path = get_theme_path('icon-round.png')  # Файл по умолчанию
+                coin_image_path = get_theme_path('icon-round.png')
             else:
                 coin_image_path = get_theme_path('icon-round.png')
 
@@ -152,11 +155,11 @@ class EasyProgramsDownloader:
             surface.blit(coin_image, coin_rect)
 
         def upgrade_click_value():
-            global click_value
+            nonlocal click_value
             click_value += 1
 
         def upgrade_cps():
-            global coins_per_second
+            nonlocal coins_per_second
             coins_per_second += 1
 
         def change_coin_habbit():
@@ -172,7 +175,7 @@ class EasyProgramsDownloader:
             skin = "DEF"
 
         def increase_coin_size():
-            global coin_size
+            nonlocal coin_size
             coin_size += 10
 
         # Основной игровой цикл
@@ -263,8 +266,10 @@ class EasyProgramsDownloader:
                 screen.blit(upgrade_text, (shop_x + 15, shop_y + 55 + index * (button_height + 10)))
 
             pygame.display.flip()
+            clock.tick(60)
 
-    
+        pygame.quit()
+
     def set_save_path(self, path):
         self.save_path = path
         if not os.path.exists(self.save_path):
@@ -376,7 +381,7 @@ class EasyProgramsDownloader:
         chunk_size = 1024
         downloaded_size = 0
         start_time = time.time()
-        
+
         with open(file_path, 'wb') as file:
             for data in response.iter_content(chunk_size=chunk_size):
                 file.write(data)
