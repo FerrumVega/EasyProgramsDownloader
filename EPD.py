@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import requests
 import os
+import sys
 import threading
 import time
 
@@ -12,7 +13,17 @@ class EasyProgramsDownloader:
         self.save_path = ""
         self.current_category_index = 0
         self.root.geometry("550x500")
-        
+        self.apply_azure_theme()
+
+    def apply_azure_theme(self):
+        base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
+        theme_path = os.path.join(base_path, "themes")
+        azure_path = os.path.join(theme_path, "azure.tcl")
+        print(azure_path)
+        if os.path.exists(azure_path):
+            self.root.tk.call("source", azure_path)
+            self.root.tk.call("set_theme", "dark")
+
         self.download_info_frame = ttk.Frame(self.root)
         self.download_info_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
         
