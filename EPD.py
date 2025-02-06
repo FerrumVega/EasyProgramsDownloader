@@ -12,7 +12,7 @@ class EasyProgramsDownloader:
         self.root.title("Easy Programs Downloader")
         self.save_path = ""
         self.current_category_index = 0
-        self.root.geometry("550x500")
+        self.root.geometry("630x570")
         self.apply_azure_theme()
 
     def apply_azure_theme(self):
@@ -36,28 +36,24 @@ class EasyProgramsDownloader:
         
         self.programs = {
             "Браузеры": {
-                "Vivaldi": {"url": "https://downloads.vivaldi.com/stable/Vivaldi.6.7.3329.44.exe", "description": "Браузер с очень гибкой настройкой внешнего вида основанный на Chromium.", "pros": ["Гибкость", "Много функций"], "cons": ["Требует времени для настройки"]},
-                "Firefox": {"url": "https://download.mozilla.org/?product=firefox-latest&os=win64&lang=ru", "description": "Открытый браузер с поддержкой расширений.", "pros": ["Открытый исходный код", "Много расширений"], "cons": ["Может быть медленным"]},
-                "Waterfox": {"url": "https://cdn.waterfox.net/releases/win64/installer/Waterfox%20G6.0.12%20Setup.exe", "description": "Браузер на основе Firefox, ориентированный на приватность.", "pros": ["Приватность", "Совместимость с Firefox"], "cons": ["Меньше расширений"]},
+                "Vivaldi": {"url": "https://downloads.vivaldi.com/stable/Vivaldi.7.1.3570.47.x64.exe", "description": "Браузер с очень гибкой настройкой внешнего вида основанный на Chromium.", "pros": ["Гибкость", "Много функций"], "cons": ["Требует времени для настройки"]},
+                "Firefox": {"url": "https://www.mozilla.org/ru/firefox/download/thanks/", "description": "Открытый браузер с поддержкой расширений.", "pros": ["Открытый исходный код", "Много расширений"], "cons": ["Может быть медленным"]},
+                "Waterfox": {"url": "https://cdn1.waterfox.net/waterfox/releases/latest/windows", "description": "Браузер на основе Firefox, ориентированный на приватность.", "pros": ["Приватность", "Совместимость с Firefox"], "cons": ["Меньше расширений"]},
                 "Google Chrome": {"url": "https://dl.google.com/chrome/install/latest/chrome_installer.exe", "description": "Популярный браузер от Google.", "pros": ["Быстрый", "Много расширений"], "cons": ["Требляет много памяти"]},
-                "Brave": {"url": "https://referrals.brave.com/latest/BraveBrowserSetup.exe", "description": "Браузер с блокировкой рекламы и трекеров.", "pros": ["Приватность", "Блокировка рекламы"], "cons": ["Меньше расширений"]},
+                "Brave": {"url": "https://laptop-updates.brave.com/download/BRV010?bitness=64", "description": "Браузер с блокировкой рекламы и трекеров.", "pros": ["Приватность", "Блокировка рекламы"], "cons": ["Меньше расширений"]},
             },
             "Социальные сети": {
                 "Telegram": {"url": "https://telegram.org/dl/desktop/win64", "description": "Мессенджер с поддержкой шифрования.", "pros": ["Безопасность", "Кроссплатформенность"], "cons": ["Нет звонков на ПК"]},
-                "64Gram": {"url": "https://github.com/TDesktop-x64/tdesktop/releases/download/v1.1.35/64Gram-setup-x64.1.1.35.exe", "description": "Форк Telegram с дополнительными функциями.", "pros": ["Дополнительные функции", "Приватность"], "cons": ["Меньше поддержки"]},
-                "Discord": {"url": "https://dl.discordapp.net/distro/app/stable/win/x86/1.0.9012/DiscordSetup.exe", "description": "Платформа для общения геймеров.", "pros": ["Голосовые каналы", "Интеграции"], "cons": ["Требует много ресурсов"]},
-                "Vencord": {"url": "https://github.com/Vencord/Installer/releases/latest/download/VencordInstaller.exe", "description": "Форк для Discord с дополнительными функциями.", "pros": ["Обход ограничений Nitro", "Поддержка плагинов"], "cons": ["Меньше поддержки"]},
-            },
+                "Discord": {"url": "https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x64", "description": "Платформа для общения геймеров.", "pros": ["Голосовые каналы", "Интеграции"], "cons": ["Требует много ресурсов"]}            },
+            
             "Плееры": {
                 "VLC": {"url": "https://get.videolan.org/vlc/3.0.21/win64/vlc-3.0.21-win64.exe", "description": "Популярнейший медиаплеер с открытым исходным кодом.", "pros": ["Открытый исходный код", "Поддержка ТВ-Каналов"], "cons": ["Не всегда удобен"]},
-                "MPC-HC": {"url": "https://github.com/clsid2/mpc-hc/releases/download/1.9.18/mpc-hc-1.9.18-x64.exe", "description": "Удобный видеоплеер с поддержкой многих кодеков.", "pros": ["Поддержка кодеков", "Простота использования"], "cons": ["Устаревший интерфейс"]},
-                "iTunes": {"url": "https://secure-appldnld.apple.com/itunes12/002-67830-20220125-46C2F7A4-14E7-11EC-8E9F-1A8E216E98BC/iTunes64Setup.exe", "description": "Плеер от Apple для управления музыкой и рингтонами на iPhone.", "pros": ["Поддержка iPhone", "Большая библиотека"], "cons": ["Медленный"]},
+                "MPC-HC": {"url": "https://github.com/mpc-hc/mpc-hc/releases/download/1.7.13/MPC-HC.1.7.13.x64.exe", "description": "Удобный видеоплеер с поддержкой многих кодеков.", "pros": ["Поддержка кодеков", "Простота использования"], "cons": ["Устаревший интерфейс"]},
+                "iTunes": {"url": "https://secure-appldnld.apple.com/itunes12/031-69284-20160802-7E7B2D20-552B-11E6-B2B9-696CECD541CE/iTunes64Setup.exe", "description": "Плеер от Apple для управления музыкой и рингтонами на iPhone.", "pros": ["Поддержка iPhone", "Большая библиотека"], "cons": ["Медленный"]},
             },
             "Библиотеки": {
-                "Java 8": {"url": "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=248242_ce59cff5c23f4e2eaf4e778a117d4c5b", "description": "Лучшая версия для Minecraft до 1.12", "pros": ["Стабильность", "Поддержка Minecraft"], "cons": ["Старое ПО"]},
-                "Java 17": {"url": "https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.exe", "description": "Лучшая версия для Minecraft до 1.20", "pros": ["Стабильность", "Поддержка Minecraft"], "cons": ["Необходимость обновлений"]},
-                "Java 21": {"url": "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe", "description": "Самый оптимальный и актуальный вариант", "pros": ["Оптимизация", "Поддержка новых версий"], "cons": ["Требует обновлений"]},
-                "VS0813": {"url": "https://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe", "description": "Microsoft Visual C++ Redistributable 2008 - 2013", "pros": ["Необходим для старых программ", "Широкое применение"], "cons": ["Старое ПО"]},
+                "Java 17": {"url": "https://download.oracle.com/java/17/archive/jdk-17.0.11_windows-x64_bin.msi", "description": "Лучшая версия для Minecraft до 1.20", "pros": ["Стабильность", "Поддержка Minecraft"], "cons": ["Необходимость обновлений"]},
+                "Java 21": {"url": "https://download.oracle.com/java/21/archive/jdk-21.0.3_windows-x64_bin.msi", "description": "Самый оптимальный и актуальный вариант", "pros": ["Оптимизация", "Поддержка новых версий"], "cons": ["Требует обновлений"]},
                 "VS1522": {"url": "https://aka.ms/vs/17/release/vc_redist.x64.exe", "description": "Microsoft Visual C++ Redistributable 2015 - 2022", "pros": ["Необходим для новых программ", "Широкое применение"], "cons": ["Большой объем"]},
             },
             "Игры": {
@@ -65,55 +61,50 @@ class EasyProgramsDownloader:
                 "Epic Games": {"url": "https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi", "description": "Популярная площадка с регулярными раздачами игр.", "pros": ["Раздачи игр", "Инди проекты"], "cons": ["Меньше игр, чем в Steam"]},
             },
             "Редакторы": {
-                "Audacity": {"url": "https://github.com/audacity/audacity/releases/download/Audacity-3.4.2/audacity-win-3.4.2-64bit.exe", "description": "Полезный инструмент для редактирования аудио.", "pros": ["Функциональность", "Простота использования"], "cons": ["Ограниченный интерфейс"]},
-                "CapCut": {"url": "https://lf16-capcut.faceulv.com/obj/capcutpc-packages-us/packages/CapCut_1_6_0_128_capcutpc_0.exe", "description": "Простой монтажёр для новичков.", "pros": ["Простота использования", "Бесплатность"], "cons": ["Ограниченный функционал"]},
-                "PDN": {"url": "https://www.getpaint.net/download.html#download", "description": "Простой аналог Adobe Photoshop с поддержкой плагинов.", "pros": ["Простота использования", "Поддержка плагинов"], "cons": ["Ограниченный функционал"]},
+                "Audacity": {"url": "https://github.com/audacity/audacity/releases/download/Audacity-3.7.1/audacity-win-3.7.1-64bit.exe", "description": "Полезный инструмент для редактирования аудио.", "pros": ["Функциональность", "Простота использования"], "cons": ["Ограниченный интерфейс"]},
+                "CapCut": {"url": "https://lf16-capcut.faceulv.com/obj/capcutpc-packages-us/installer/capcut_capcutpc_0_1.2.6_installer.exe", "description": "Простой монтажёр для новичков.", "pros": ["Простота использования", "Бесплатность"], "cons": ["Ограниченный функционал"]},
+                "Paint.net": {"url": "https://github.com/paintdotnet/release/releases/download/v5.1.2/paint.net.5.1.2.install.anycpu.web.zip", "description": "Простой аналог Adobe Photoshop с поддержкой плагинов.", "pros": ["Простота использования", "Поддержка плагинов"], "cons": ["Ограниченный функционал"]},
             },
             "Утилиты": {
-                "7-Zip": {"url": "https://www.7-zip.org/a/7z2301-x64.exe", "description": "Лучший архиватор файлов.", "pros": ["Высокая степень сжатия", "Бесплатность"], "cons": ["Ограниченный интерфейс"]},
-                "OBS": {"url": "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-29.1.3-Full-Installer-x64.exe", "description": "Лучшая программа для стриминга.", "pros": ["Функциональность", "Бесплатность"], "cons": ["Сложность настройки"]},
-                "Handbrake": {"url": "https://github.com/HandBrake/HandBrake/releases/download/1.6.1/HandBrake-1.6.1-x86_64-Win_GUI.exe", "description": "Полезная утилита для конвертации видео.", "pros": ["Функциональность", "Бесплатность"], "cons": ["Сложность использования"]},
-                "AHK": {"url": "https://www.autohotkey.com/download/ahk-install.exe", "description": "Программа для автоматизации действий на клавиатуре.", "pros": ["Автоматизация", "Бесплатность"], "cons": ["Сложность настройки"]},
-                "ShareX": {"url": "https://github.com/ShareX/ShareX/releases/download/v15.0.0/ShareX-15.0.0-setup.exe", "description": "Мощный инструмент для создания скриншотов.", "pros": ["Широкие возможности", "Высокая кастомизация"], "cons": ["Сложность освоения"]},
-                "Radmin VPN": {"url": "https://download.radmin-vpn.com/download/radmin-vpn-1.3.4567.1.exe", "description": "Простейший инструмент для эмуляции локальной игры.", "pros": ["Простота использования", "Эмуляция локальной игры"], "cons": ["Ограниченные возможности"]},
+                "7-Zip": {"url": "https://www.7-zip.org/a/7z2409-x64.exe", "description": "Лучший архиватор файлов.", "pros": ["Высокая степень сжатия", "Бесплатность"], "cons": ["Ограниченный интерфейс"]},
+                "OBS": {"url": "https://cdn-fastly.obsproject.com/downloads/OBS-Studio-31.0.1-Windows-Installer.exe", "description": "Лучшая программа для стриминга.", "pros": ["Функциональность", "Бесплатность"], "cons": ["Сложность настройки"]},
+                "Handbrake": {"url": "https://handbrake.fr/rotation.php?file=HandBrake-1.9.0-x86_64-Win_GUI.exe", "description": "Полезная утилита для конвертации видео.", "pros": ["Функциональность", "Бесплатность"], "cons": ["Сложность использования"]},
+                "AutoHotKey": {"url": "https://www.autohotkey.com/download/ahk-v2.exe", "description": "Программа для автоматизации действий на клавиатуре.", "pros": ["Автоматизация", "Бесплатность"], "cons": ["Сложность настройки"]},
+                "ShareX": {"url": "https://github.com/ShareX/ShareX/releases/download/v17.0.0/ShareX-17.0.0-setup.exe", "description": "Мощный инструмент для создания скриншотов.", "pros": ["Широкие возможности", "Высокая кастомизация"], "cons": ["Сложность освоения"]},
+                "Radmin VPN": {"url": "https://download.radmin-vpn.com/download/files/Radmin_VPN_1.4.4642.1.exe", "description": "Простейший инструмент для эмуляции локальной игры.", "pros": ["Простота использования", "Эмуляция локальной игры"], "cons": ["Ограниченные возможности"]},
                 "Hamachi": {"url": "https://secure.logmein.com/hamachi.msi", "description": "Хороший аналог RadminVPN.", "pros": ["Меньший пинг", "Простота использования"], "cons": ["Лимит в 5 человек"]},
-                "TwitchLink": {"url": "https://github.com/devhotteok/TwitchLink/releases/download/3.2.0/TwitchLinkSetup-3.2.0.exe", "description": "Программа для скачивания стримов из Twitch.", "pros": ["Скачивание стримов", "Простота использования"], "cons": ["Ограниченные возможности"]},
-                "qBitTorrent": {"url": "https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_4.6.2_x64_setup.exe", "description": "Популярнейший торрент клиент.", "pros": ["Быстрота", "Простота использования"], "cons": ["Необходимость настройки"]},
-                "NanaZIP": {"url": "https://github.com/M2Team/NanaZip/releases/download/1.1.367.0/NanaZip-1.1.367.0-x64.exe", "description": "Лучший форк 7-Zip с дизайном из Windows 11.", "pros": ["Дизайн Windows 11", "Поддержка алгоритмов сжатия"], "cons": ["Ограниченная поддержка"]},
-                "AnyDesk": {"url": "https://download.anydesk.com/AnyDesk.exe", "description": "Лучшая программа для управления удалённым рабочим столом.", "pros": ["Управление удалённым рабочим столом", "Простота использования"], "cons": ["Ограниченная функциональность"]},
-                "Dr.Web CureIt": {"url": "https://free.drweb.ru/download+cureit+free/", "description": "Программа для сканирования на вирусы.", "pros": ["Сканирование на вирусы", "База данных обновляется каждый день"], "cons": ["Ограниченная функциональность"]},
-                "Scrcpy": {"url": "https://github.com/Genymobile/scrcpy/releases/download/v2.0/scrcpy-win64-v2.0.zip", "description": "Программа для отображения изображения из Android.", "pros": ["Отображение изображения из Android", "Управление смартфоном"], "cons": ["Ограниченная поддержка"]},
+                "TwitchLink": {"url": "https://github.com/devhotteok/TwitchLink/releases/download/3.3.0/TwitchLinkSetup-3.3.0.exe", "description": "Программа для скачивания стримов из Twitch.", "pros": ["Скачивание стримов", "Простота использования"], "cons": ["Ограниченные возможности"]},
+                "NanaZIP": {"url": "https://github.com/M2Team/NanaZip/releases/download/5.0.1252.0/NanaZip_5.0.1252.0.msixbundle", "description": "Лучший форк 7-Zip с дизайном из Windows 11.", "pros": ["Дизайн Windows 11", "Поддержка алгоритмов сжатия"], "cons": ["Ограниченная поддержка"]},
+                "AnyDesk": {"url": "https://anydesk.com/ru/downloads/thank-you?dv=win_exe", "description": "Лучшая программа для управления удалённым рабочим столом.", "pros": ["Управление удалённым рабочим столом", "Простота использования"], "cons": ["Ограниченная функциональность"]},
+                "Dr.Web CureIt": {"url": "https://free.drweb.ru/download+cureit/gr/", "description": "Программа для сканирования на вирусы.", "pros": ["Сканирование на вирусы", "База данных обновляется каждый день"], "cons": ["Ограниченная функциональность"]},
+                "Scrcpy": {"url": "https://github.com/Genymobile/scrcpy/releases/download/v3.1/scrcpy-win64-v3.1.zip", "description": "Программа для отображения изображения из Android.", "pros": ["Отображение изображения из Android", "Управление смартфоном"], "cons": ["Ограниченная поддержка"]},
             },
             "Для разработчиков": {
                 "VSCODE": {"url": "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user", "description": "Простой редактор кода от Microsoft.", "pros": ["Простота использования", "Большая поддержка расширений"], "cons": ["Требует настроек"]},
-                "VSTUDIO": {"url": "https://download.visualstudio.microsoft.com/download/pr/17b6759f-1af0-41bc-ab12-209ba0377779/e8d02195dbf1434b940e0f48ae8d5e50/vs_Community.exe", "description": "Функциональная среда разработки от Microsoft.", "pros": ["Поддержка многих языков программирования", "Интеграции с другими инструментами"], "cons": ["Сложность освоения"]},
-                "PyCharm": {"url": "https://download.jetbrains.com/python/pycharm-community-2023.2.2.exe", "description": "Среда разработки для Python.", "pros": ["Поддержка Python", "Функциональность"], "cons": ["Необходимость настроек"]},
+                "VSTUDIO": {"url": "https://c2rsetup.officeapps.live.com/c2r/downloadVS.aspx?sku=community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030:562f1c80de4b4c0ba5da9fba6d9cc806", "description": "Функциональная среда разработки от Microsoft.", "pros": ["Поддержка многих языков программирования", "Интеграции с другими инструментами"], "cons": ["Сложность освоения"]},
+                "PyCharm": {"url": "https://download-cdn.jetbrains.com/python/pycharm-community-2024.3.2.exe", "description": "Среда разработки для Python.", "pros": ["Поддержка Python", "Функциональность"], "cons": ["Необходимость настроек"]},
             },
             "Виртуальные машины": {
-                "VirtualBox": {"url": "https://download.virtualbox.org/virtualbox/7.0.10/VirtualBox-7.0.10-158379-Win.exe", "description": "Простая виртуальная машина.", "pros": ["Простота использования", "Бесплатность"], "cons": ["Ограниченная поддержка"]},
+                "VirtualBox": {"url": "https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1.6-167084-Win.exe", "description": "Простая виртуальная машина.", "pros": ["Простота использования", "Бесплатность"], "cons": ["Ограниченная поддержка"]},
             },
             "Твики": {
-                "StartIsBack": {"url": "https://startisback.com/StartIsBackPlusPlus_setup.exe", "description": "Программа для изменения разрешения экрана.", "pros": ["Изменение разрешения", "Поддержка высокой герцовки"], "cons": ["Сложность настройки"]},
-                "ExplorerPatcher": {"url": "https://github.com/valinet/ExplorerPatcher/releases/download/22000.2582.57.3/ExplorerPatcher-amd64-22000.2582.57.3.exe", "description": "Популярный твикер с открытым исходным кодом.", "pros": ["Открытый исходный код", "Широкая поддержка"], "cons": ["Сложность освоения"]},
+                "StartIsBack (Windows 10)": {"url": "https://startisback.sfo3.cdn.digitaloceanspaces.com/StartIsBackPlusPlus_setup.exe", "description": "Программа для изменения разрешения экрана.", "pros": ["Изменение разрешения", "Поддержка высокой герцовки"], "cons": ["Сложность настройки"]},
+                "ExplorerPatcher": {"url": "https://github.com/valinet/ExplorerPatcher/releases/download/22621.4317.67.1_b93337a/ep_setup.exe", "description": "Популярный твикер с открытым исходным кодом.", "pros": ["Открытый исходный код", "Широкая поддержка"], "cons": ["Сложность освоения"]},
             },
             "Работа с флешками": {
-                "Rufus": {"url": "https://github.com/pbatard/rufus/releases/download/v4.2/rufus-4.2.exe", "description": "Программа для записи ISO образов на флешку.", "pros": ["Быстрота", "Надёжность"], "cons": ["Ограниченный функционал"]},
-                "BalenaEtcher": {"url": "https://github.com/balena-io/etcher/releases/download/v1.18.11/balenaEtcher-Setup-1.18.11.exe", "description": "Программа для записи образов Linux на флешку.", "pros": ["Быстрота", "Простота использования"], "cons": ["Ограниченный функционал"]},
-                "Ventoy": {"url": "https://github.com/ventoy/Ventoy/releases/download/v1.0.96/ventoy-1.0.96-windows.zip", "description": "Программа для записи нескольких образов на флешку.", "pros": ["Поддержка нескольких образов", "Простота использования"], "cons": ["Ограниченная поддержка"]},
+                "Rufus": {"url": "https://github.com/pbatard/rufus/releases/download/v4.6/rufus-4.6.exe", "description": "Программа для записи ISO образов на флешку.", "pros": ["Быстрота", "Надёжность"], "cons": ["Ограниченный функционал"]},
+                "BalenaEtcher": {"url": "https://github.com/balena-io/etcher/releases/download/v1.19.25/balenaEtcher-1.19.25.Setup.exe", "description": "Программа для записи образов Linux на флешку.", "pros": ["Быстрота", "Простота использования"], "cons": ["Ограниченный функционал"]},
+                "Ventoy": {"url": "https://github.com/ventoy/Ventoy/releases/download/v1.1.00/ventoy-1.1.00-windows.zip", "description": "Программа для записи нескольких образов на флешку.", "pros": ["Поддержка нескольких образов", "Простота использования"], "cons": ["Ограниченная поддержка"]},
             },
             "Диагностика": {
-                "CPU-Z": {"url": "https://download.cpuid.com/cpu-z/cpu-z_2.07-en.exe", "description": "Просмотр информации о процессоре.", "pros": ["Информация о процессоре", "Простота использования"], "cons": ["Ограниченная функциональность"]},
-                "GPU-Z": {"url": "https://www.techpowerup.com/download/techpowerup-gpu-z/", "description": "Просмотр информации о видеокарте.", "pros": ["Информация о видеокарте", "Простота использования"], "cons": ["Ограниченная функциональность"]},
-                "CrystalDiskInfo": {"url": "https://osdn.net/dl/crystaldiskinfo/CrystalDiskInfo8_17_14.exe", "description": "Просмотр информации о жестких дисках и SSD.", "pros": ["Информация о жестких дисках", "Процент износа"], "cons": ["Ограниченная поддержка"]},
-                "CrystalDiskMark": {"url": "https://osdn.net/dl/crystaldiskmark/CrystalDiskMark8_0_4c.exe", "description": "Проверка скорости жесткого диска или SSD.", "pros": ["Проверка скорости", "Простота использования"], "cons": ["Ограниченный функционал"]},
-            },
-            "VPN Клиенты": {
-                "Outline": {"url": "https://s3.amazonaws.com/outline-releases/client/windows/stable/Outline-Client.exe", "description": "Outline VPN клиент.", "pros": ["Простота использования", "Поддержка"], "cons": ["Ограниченная поддержка"]},
-                "Amnezia": {"url": "https://github.com/AmneziaVPN/desktop-client/releases/download/2.2.0/AmneziaVPN-2.2.0.exe", "description": "Amnezia VPN клиент.", "pros": ["Простота использования", "Поддержка"], "cons": ["Ограниченная поддержка"]},
+                "CPU-Z": {"url": "https://download.cpuid.com/cpu-z/cpu-z_2.13-en.exe", "description": "Просмотр информации о процессоре.", "pros": ["Информация о процессоре", "Простота использования"], "cons": ["Ограниченная функциональность"]},
+                "GPU-Z": {"url": "https://de2-dl.techpowerup.com/files/zWEn9NPP7_ysO6N9BlECDg/1738810232/GPU-Z.2.62.0.exe", "description": "Просмотр информации о видеокарте.", "pros": ["Информация о видеокарте", "Простота использования"], "cons": ["Ограниченная функциональность"]},
+                "CrystalDiskInfo": {"url": "https://netix.dl.sourceforge.net/project/crystaldiskinfo/9.5.0/CrystalDiskInfo9_5_0.exe?viasf=1", "description": "Просмотр информации о жестких дисках и SSD.", "pros": ["Информация о жестких дисках", "Процент износа"], "cons": ["Ограниченная поддержка"]},
+                "CrystalDiskMark": {"url": "https://deac-riga.dl.sourceforge.net/project/crystaldiskmark/8.0.6/CrystalDiskMark8_0_6.exe?viasf=1", "description": "Проверка скорости жесткого диска или SSD.", "pros": ["Проверка скорости", "Простота использования"], "cons": ["Ограниченный функционал"]},
             },
             "Драйвера": {
-                "AMD": {"url": "https://drivers.amd.com/drivers/installer/22.20/whql/amd-software-adrenalin-edition-22.20.00.33.exe", "description": "Панель управления графикой AMD.", "pros": ["Поддержка AMD", "Функциональность"], "cons": ["Требует обновлений"]},
-                "NVIDIA": {"url": "https://us.download.nvidia.com/Windows/528.24/528.24-desktop-win10-win11-64bit-international-dch-whql.exe", "description": "Приложение для управления видеокартами NVIDIA.", "pros": ["Поддержка NVIDIA", "Функциональность"], "cons": ["Требует обновлений"]},
+                "AMD": {"url": "https://drivers.amd.com/drivers/installer/24.20/whql/amd-software-adrenalin-edition-24.12.1-minimalsetup-241204_web.exe", "description": "Панель управления графикой AMD.", "pros": ["Поддержка AMD", "Функциональность"], "cons": ["Требует обновлений"]},
+                "NVIDIA": {"url": "https://uk.download.nvidia.com/nvapp/client/11.0.2.312/NVIDIA_app_v11.0.2.312.exe", "description": "Приложение для управления видеокартами NVIDIA.", "pros": ["Поддержка NVIDIA", "Функциональность"], "cons": ["Требует обновлений"]},
             }
         }
 
@@ -129,6 +120,7 @@ class EasyProgramsDownloader:
         ttk.Label(self.root, text="Этот скрипт создан FerrumVega для лёгкого и быстрого скачивания программ.", wraplength=400).pack(pady=10)
         
         ttk.Button(self.root, text="Перейти в Telegram канал FerrumVega", command=lambda: os.system("start https://t.me/FerrumVega")).pack(pady=5)
+        ttk.Button(self.root, text="Что не вошло в программу", command=self.info).pack(pady=5)
         ttk.Button(self.root, text="Выбрать путь для сохранения файлов", command=self.choose_path_menu).pack(pady=5)
         ttk.Button(self.root, text="Выбрать программы", command=self.custom_selection_menu).pack(pady=5)
         ttk.Button(self.root, text="Выйти", command=self.root.quit).pack(pady=5)
@@ -141,7 +133,12 @@ class EasyProgramsDownloader:
         ttk.Button(self.root, text="Сохранить на рабочий стол в папку Programs", command=lambda: self.set_save_path(os.path.join(os.path.expanduser("~"), "Desktop", "Programs"))).pack(pady=5)
         ttk.Button(self.root, text="Указать свой путь", command=self.set_custom_path).pack(pady=5)
         ttk.Button(self.root, text="Назад", command=self.main_menu).pack(pady=5)
-
+        
+    def info(self):
+        self.clear_window_except_download_info()
+        ttk.Label(self.root, text="Вырезано:\n1. 64Gram.\nПричина: сомнительный клиент\n2. Vencord\nПричина: сомнительный клиент\n3. Java 8\nПричина: отсутствие прямой ссылки на скачивание, устаревшая версия\n4. VS0813\nПричина: отсутствие прямой ссылки на скачивание, устаревшая версия\n5. qBitTorrent\nПричина: временная ссылка на скачивание\n6. Outline VPN, Amnezia VPN\nПричина: не доказана безопасность\n7. Custom Resoulution Utility заменена на StartIsBack.\nПричина: сложность настройки, непопулярность", wraplength=400).pack(pady=10)
+        ttk.Button(self.button_frame, text="Главное меню", command=self.main_menu).pack(side=tk.LEFT, padx=10)
+        
     def set_save_path(self, path):
         self.save_path = path
         if not os.path.exists(self.save_path):
