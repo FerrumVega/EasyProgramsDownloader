@@ -1,18 +1,27 @@
-// Пример простого скрипта для будущих функций или анимаций
-// Используйте этот файл для добавления интерактивных элементов позже
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Здесь можно добавить ваши скрипты
-    console.log("Сайт загружен и скрипты готовы к работе!");
-});
-
-// Пример плавного скролла к якорным ссылкам (если потребуется)
+// Плавный скролл для якорных ссылок
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
         document.querySelector(this.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
         });
     });
+});
+
+// Анимация появления секций при скролле
+const sections = document.querySelectorAll('.gradient-section');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+sections.forEach(section => {
+    section.style.opacity = 0;
+    section.style.transform = 'translateY(50px)';
+    observer.observe(section);
 });
