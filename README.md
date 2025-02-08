@@ -13,4 +13,5 @@
 6. В Console Window выберите Window Based (hide the console)
 7. Раскройте Icon и через Browse выберите иконку icon.ico.
 8. Раскройте Additional Files и через Add Folder выберите папку с именем themes (обязательно с этим именем). Внутри папки распакуйте архив themes.rar.
-9. Вы можете импортировать настройки auto-py-to-exe, для этого раскройте Settings и в Configuration нажмите Export Config To JSON File. При следующем использовании нажмите Import Config From JSON File.
+9. В Settings в Output Directory нажмите Browse и выберите папку, в которую сохранится exe.
+10. Вы можете импортировать настройки auto-py-to-exe, для этого раскройте Settings и в Configuration нажмите Export Config To JSON File. При следующем использовании нажмите Import Config From JSON File.
