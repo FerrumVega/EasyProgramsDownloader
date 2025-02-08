@@ -1,3 +1,7 @@
+> [!WARNING]
+> Program is using Azure theme, which is under MIT license.
+> Copyright (c) 2021 rdbende
+
 Как пользоваться:
 1. EPD.py:
    Просто откройте файл. Если файл не открывается, значит на компьютере не установлен Python.
