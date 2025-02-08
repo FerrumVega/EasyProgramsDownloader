@@ -1,6 +1,6 @@
 > [!WARNING]
 > Program is using Azure theme and auto-py-to-exe, which are under MIT license.\
-> Copyright (c) 2021 rdbende
+> Copyright (c) 2021 rdbende\
 > Copyright (c) 2023 Brent Vollebregt
 
 Чтобы использовать программу, просто откройте EPD.exe
