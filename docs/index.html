@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Easy Programs Downloader | FerrumVega</title>
+    <link rel="icon" href="D:\flash\piton\icon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="D:\flash\piton\icon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -159,6 +161,23 @@
             transform: scale(1.1);
         }
 
+        .small-download-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: black;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .small-download-btn:hover {
+            transform: scale(1.05);
+        }
+
         footer {
             text-align: center;
             padding: 2rem;
@@ -220,6 +239,24 @@
             color: white; /* Смайлики теперь белые */
         }
 
+        .screenshot {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot img {
+            max-width: 30%;
+            border-radius: 15px;
+            border: 2px solid var(--main-color);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot img:hover {
+            transform: scale(1.05);
+        }
+
         /* Медиа-запросы для мобильных устройств */
         @media (max-width: 768px) {
             body {
@@ -273,6 +310,10 @@
             header {
                 padding-top: 8rem; /* Увеличен отступ сверху для мобильных устройств */
             }
+
+            .screenshot img {
+                max-width: 80%;
+            }
         }
     </style>
 </head>
@@ -283,6 +324,8 @@
         <div class="nav-links">
             <a href="#about">О проекте</a>
             <a href="#features">Возможности</a>
+            <a href="#programs">Список программ</a>
+            <a href="#screenshots">Скриншоты</a>
             <a href="#install">Установка</a>
         </div>
     </nav>
@@ -290,6 +333,7 @@
     <header>
         <h1 class="title">Easy Programs Downloader</h1>
         <p class="gradient-text" style="font-size: 1.2rem; margin-top: 1rem;">Автоматизация загрузки программ никогда не была такой простой</p>
+        <a href="https://github.com/FerrumVega/EasyProgramsDownloader/releases/download/v1.2.0/EPD.exe" class="small-download-btn">Быстрое скачивание</a>
     </header>
 
     <section id="about">
@@ -333,6 +377,126 @@
                         <h3><span>🚀</span> Быстрая установка</h3>
                         <p>Пакетная установка всех необходимых программ одной командой</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs">
+        <div class="neon-border">
+            <div class="content-box">
+                <h2 class="gradient-text">Список программ</h2>
+		<h2> </h2>
+                <ul>
+                    <li><strong>Браузеры:</strong></li>
+                    <ul>
+                        <li>Vivaldi</li>
+                        <li>Firefox</li>
+                        <li>Waterfox</li>
+                        <li>Google Chrome</li>
+                        <li>Brave</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Социальные сети:</strong></li>
+                    <ul>
+                        <li>Telegram</li>
+                        <li>Discord</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Плееры:</strong></li>
+                    <ul>
+                        <li>VLC</li>
+                        <li>MPC-HC</li>
+                        <li>iTunes</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Библиотеки:</strong></li>
+                    <ul>
+                        <li>Java 17</li>
+                        <li>Java 21</li>
+                        <li>VS1522</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Игры:</strong></li>
+                    <ul>
+                        <li>Steam</li>
+                        <li>Epic Games</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Редакторы:</strong></li>
+                    <ul>
+                        <li>Audacity</li>
+                        <li>CapCut</li>
+                        <li>Paint.net</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Утилиты:</strong></li>
+                    <ul>
+                        <li>7-Zip</li>
+                        <li>OBS</li>
+                        <li>Handbrake</li>
+                        <li>AutoHotKey</li>
+                        <li>ShareX</li>
+                        <li>Radmin VPN</li>
+                        <li>Hamachi</li>
+                        <li>TwitchLink</li>
+                        <li>NanaZIP</li>
+                        <li>AnyDesk</li>
+                        <li>Dr.Web CureIt</li>
+                        <li>Scrcpy</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Для разработчиков:</strong></li>
+                    <ul>
+                        <li>VSCODE</li>
+                        <li>VSTUDIO</li>
+                        <li>PyCharm</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Виртуальные машины:</strong></li>
+                    <ul>
+                        <li>VirtualBox</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Твики:</strong></li>
+                    <ul>
+                        <li>StartIsBack (Windows 10)</li>
+                        <li>ExplorerPatcher</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Работа с флешками:</strong></li>
+                    <ul>
+                        <li>Rufus</li>
+                        <li>BalenaEtcher</li>
+                        <li>Ventoy</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Диагностика:</strong></li>
+                    <ul>
+                        <li>CPU-Z</li>
+                        <li>GPU-Z</li>
+                        <li>CrystalDiskInfo</li>
+                        <li>CrystalDiskMark</li>
+			<h2> </h2>
+                    </ul>
+                    <li><strong>Драйвера:</strong></li>
+                    <ul>
+                        <li>AMD</li>
+                        <li>NVIDIA</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots">
+        <div class="neon-border">
+            <div class="content-box">
+                <h2 class="gradient-text">Скриншоты программы</h2>
+                <div class="screenshot">
+                    <img src="sc1.png" alt="Screenshot 1">
+                    <img src="sc2.png" alt="Screenshot 2">
+                    <img src="sc3.png" alt="Screenshot 3">
                 </div>
             </div>
         </div>
