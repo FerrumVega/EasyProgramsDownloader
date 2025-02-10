@@ -1,8 +1,3 @@
-> [!WARNING]
-> Program is using Azure theme and auto-py-to-exe, which are under MIT license.\
-> Copyright (c) 2021 rdbende\
-> Copyright (c) 2023 Brent Vollebregt
-
 Чтобы использовать программу, просто откройте EPD.exe
 
 Как создать EPD.exe:
@@ -13,6 +8,5 @@
 5. В Onefile выберите One File
 6. В Console Window выберите Window Based (hide the console)
 7. Раскройте Icon и через Browse выберите иконку icon.ico.
-8. Раскройте Additional Files и через Add Folder выберите папку с именем themes (обязательно с этим именем). Внутри папки распакуйте архив themes.rar.
 9. В Settings в Output Directory нажмите Browse и выберите папку, в которую сохранится exe.
 10. Вы можете импортировать настройки auto-py-to-exe, для этого раскройте Settings и в Configuration нажмите Export Config To JSON File. При следующем использовании нажмите Import Config From JSON File.
