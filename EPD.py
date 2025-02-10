@@ -10,19 +10,12 @@ class EasyProgramsDownloader:
     def __init__(self, root):
         self.root = root
         self.root.title("Easy Programs Downloader")
+        icon_path = 'icon.ico'
+        if os.path.exists(icon_path):
+            self.root.iconbitmap(icon_path)
         self.save_path = ""
         self.current_category_index = 0
         self.root.geometry("630x570")
-        self.apply_azure_theme()
-
-    def apply_azure_theme(self):
-        base_path = getattr(sys, '_MEIPASS', os.path.abspath("."))
-        theme_path = os.path.join(base_path, "themes")
-        azure_path = os.path.join(theme_path, "azure.tcl")
-        print(azure_path)
-        if os.path.exists(azure_path):
-            self.root.tk.call("source", azure_path)
-            self.root.tk.call("set_theme", "dark")
 
         self.download_info_frame = ttk.Frame(self.root)
         self.download_info_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=5)
@@ -116,6 +109,8 @@ class EasyProgramsDownloader:
 
     def main_menu(self):
         self.clear_window_except_download_info()
+        for widget in self.button_frame.winfo_children():
+            widget.destroy()
         ttk.Label(self.root, text="Добро пожаловать в EPD!", font=("Arial", 14)).pack(pady=10)
         ttk.Label(self.root, text="Этот скрипт создан FerrumVega для лёгкого и быстрого скачивания программ.", wraplength=400).pack(pady=10)
         
@@ -155,6 +150,9 @@ class EasyProgramsDownloader:
     def custom_selection_menu(self):
         self.clear_window_except_download_info()
         self.button_frame.pack_forget()
+        for widget in self.button_frame.winfo_children():
+            widget.destroy()
+        
         ttk.Label(self.root, text="Выберите программы для скачивания", font=("Arial", 14)).pack(pady=10)
         
         self.program_vars = {}
@@ -269,4 +267,3 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = EasyProgramsDownloader(root)
     root.mainloop()
-
