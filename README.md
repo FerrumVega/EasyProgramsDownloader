@@ -9,4 +9,5 @@
 6. В Console Window выберите Window Based (hide the console)
 7. Раскройте Icon и через Browse выберите иконку icon.ico.
 9. В Settings в Output Directory нажмите Browse и выберите папку, в которую сохранится exe.
-10. Вы можете импортировать настройки auto-py-to-exe, для этого раскройте Settings и в Configuration нажмите Export Config To JSON File. При следующем использовании нажмите Import Config From JSON File.
+10. В Additional Files через Add Files добавьте icon.ico, во втором поле оставьте точку.
+11. Вы можете импортировать настройки auto-py-to-exe, для этого раскройте Settings и в Configuration нажмите Export Config To JSON File. При следующем использовании нажмите Import Config From JSON File.
