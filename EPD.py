@@ -10,9 +10,12 @@ class EasyProgramsDownloader:
     def __init__(self, root):
         self.root = root
         self.root.title("Easy Programs Downloader")
-        icon_path = 'icon.ico'
+        
+        base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+        icon_path = os.path.join(base_path, 'icon.ico')
         if os.path.exists(icon_path):
             self.root.iconbitmap(icon_path)
+            
         self.save_path = ""
         self.current_category_index = 0
         self.root.geometry("630x570")
