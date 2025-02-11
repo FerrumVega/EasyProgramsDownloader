@@ -307,8 +307,13 @@
             }
 
             header {
-                padding-top: 8rem; /* Увеличен отступ сверху для мобильных устройств */
+                padding-top: 12rem; /* Увеличен отступ сверху для мобильных устройств */
             }
+
+	    .screenshot {
+		flex-direction: column; /* Сделать скриншоты вертикальными на мобильных устройствах */
+        	align-items: center; /* Центрировать скриншоты */
+    	    }
 
             .screenshot img {
                 max-width: 80%;
