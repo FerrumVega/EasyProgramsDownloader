@@ -1,3 +1,5 @@
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/4c373804a96142ebba8711ae1fd410e8)](https://app.codacy.com/gh/FerrumVega/EasyProgramsDownloader/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 Чтобы использовать программу, просто откройте EPD.exe
 
 Как создать EPD.exe:
