@@ -4,18 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Лицензия | EasyProgramsDownloader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-color: #00ff9d;
+            --secondary-color: #7000ff;
+            --bg-gradient: linear-gradient(45deg, #0a0a0a, #1a1a2e);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Exo 2', sans-serif;
-            background: #1a1a2e;
+            background: var(--bg-gradient);
             color: white;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 2rem;
             text-align: center;
         }
 
@@ -23,12 +34,24 @@
             background: #000000e0;
             border-radius: 12px;
             padding: 2rem;
-            max-width: 600px;
+            max-width: 800px;
             box-shadow: 0 0 25px #00ff9d;
         }
 
         h1 {
+            font-family: 'Roboto Mono', monospace;
             font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 157, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 1.2rem;
             margin-bottom: 1.5rem;
         }
 
@@ -46,7 +69,7 @@
             display: inline-block;
             padding: 1rem 2rem;
             font-size: 1.2rem;
-            background: linear-gradient(45deg, #00ff9d, #7000ff);
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
             color: black;
             border-radius: 8px;
             text-decoration: none;
@@ -57,12 +80,24 @@
         .btn:hover {
             transform: scale(1.1);
         }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px var(--main-color);
+            }
+            to {
+                text-shadow: 0 0 30px var(--secondary-color);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="content-box">
-        <h1>Лицензионное соглашение</h1>
-        <pre>
+        <h1>Предупреждение</h1>
+        <p>Программа EasyProgramsDownloader и программы, которые она скачивает, предназначены для Windows x64. Нет гарантий, что программа будет работать на других платформах.</p>
+        <div class="content-box">
+            <h1>Лицензионное соглашение</h1>
+            <pre>
 MIT License
 
 Copyright (c) 2025 FerrumVega
@@ -84,9 +119,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-        </pre>
-        <a href="EPD.exe" class="btn" id="accept">Принимаю</a>
-        <a href="index.html" class="btn">Не принимаю</a>
+            </pre>
+            <a href="EPD.exe" class="btn" id="accept">Принимаю</a>
+            <a href="index.html" class="btn">Не принимаю</a>
+        </div>
     </div>
 
     <script>
