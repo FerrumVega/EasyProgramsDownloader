@@ -4,38 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Страница не найдена</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;600&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --main-color: #00ff9d;
+            --secondary-color: #7000ff;
+            --bg-gradient: linear-gradient(45deg, #0a0a0a, #1a1a2e);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--bg-gradient);
+            color: white;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #1a1a2e;
-            color: white;
-            font-family: 'Exo 2', sans-serif;
-            margin: 0;
+            justify-content: center;
+            text-align: center;
         }
+
         h1 {
-            font-size: 3rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 157, 0.5);
+            animation: textGlow 2s ease-in-out infinite alternate;
+            margin-bottom: 1rem;
         }
+
         p {
             font-size: 1.5rem;
+            margin-bottom: 1.5rem;
         }
+
         a {
-            color: #00ff9d;
-            text-decoration: none;
-            margin-top: 1rem;
+            display: inline-block;
+            padding: 1rem 2rem;
             font-size: 1.2rem;
+            background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+            color: black;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
         }
+
         a:hover {
-            text-decoration: underline;
+            transform: scale(1.1);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 2rem;
+            border-radius: 15px;
+            border: 3px solid var(--main-color);
+        }
+
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px var(--main-color);
+            }
+            to {
+                text-shadow: 0 0 30px var(--secondary-color);
+            }
         }
     </style>
 </head>
 <body>
     <h1>404 - Страница не найдена</h1>
-    <p>Извините, но страница, которую вы ищете, не существует.</p>
+    <p>Ой, кажется вы забрели не туда! Но не переживайте, мы уже отправили роботов на поиски нужной страницы.</p>
     <a href="index.html">Вернуться на главную</a>
+    <img src="https://media.giphy.com/media/3o7aD8v8b6rbiz3ZrC/giphy.gif" alt="Роботы ищут страницу">
 </body>
 </html>
