@@ -93,7 +93,7 @@
     </style>
 </head>
 <body>
-    <div class="content-box">
+    <div class="content-box" id="license-content">
         <h1>Предупреждение</h1>
         <p>Программа EasyProgramsDownloader и программы, которые она скачивает, предназначены для Windows x64. Нет гарантий, что программа будет работать на других платформах.</p>
         <div class="content-box">
@@ -121,18 +121,34 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
             </pre>
-            <a href="EPD.exe" class="btn" id="accept">Принимаю</a>
+            <a href="https://github.com/FerrumVega/EasyProgramsDownloader/releases/download/v1.2.0/EPD.exe" class="btn" id="accept">Принимаю</a>
             <a href="index.html" class="btn">Не принимаю</a>
         </div>
     </div>
 
+    <div class="content-box" id="download-content" style="display: none;">
+        <h1>Файл скачивается...</h1>
+        <a href="index.html" class="btn">Отмена</a>
+    </div>
+
     <script>
-        document.getElementById('accept').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'https://github.com/FerrumVega/EasyProgramsDownloader/releases/download/v1.2.0/EPD.exe';
-            window.location.href = 'index.html';
+        document.getElementById('accept').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('license-content').style.display = 'none';
+            document.getElementById('download-content').style.display = 'block';
+
+            const link = document.createElement('a');
+            link.href = this.href;
+            link.download = 'EPD.exe';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            window.addEventListener('focus', function() {
+                window.location.href = 'index.html';
+            });
         });
     </script>
-
 </body>
 </html>
